@@ -37,7 +37,7 @@ function playagain () {
 
 // This re-starts the game by calling the playagain function
 $("#again").on("click", function(){
-    var right = 0;
+    right = 0;
     playagain();    
 });
 
