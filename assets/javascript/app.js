@@ -1,17 +1,31 @@
-var right = 0
-var wrong = 0
+var right = 0;
 
-
+// This hides the questions so they are not visible until the player starts the game
 $("#questions").hide();
-
+$("#resultsDiv").hide();
 
 
 $("#start").on("click", function(){
     $("#questions").toggle();
+    $("#start").toggle();
+    timer();
+    var right = 0    
 });
+
+$("#again").on("click", function(){
+    $("#questions").toggle();
+    $("#start").hide();
+    stop();
+    timer();
+    var right = 0    
+});
+
 
 // Clicking the "submit" button ends the game.
 $("#submit").on("click", function(){
+
+$("#questions").hide();
+$("#resultsDiv").toggle();
 
 // This is checking the values submitted on the radio button answers. If the correct answer is selected, then the "right" variable is increased by one.
 if ($("input[name='question1']:checked").val() === "Aubrey Graham") {
@@ -46,10 +60,30 @@ if ($("input[name='question8']:checked").val() === "UT Austin") {
     right++
 };
 
-})
+$("#results").html("You answered " + right + " questions correctly!!");
+console.log(right);
+});
 
+// this will be used to run the countdown timer
+var intervalId
+var timeLeft = 30;
 
+function timer() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+}
 
+function decrement () {
+    timeLeft--
+    $("#timer").html("<h1> Time left: " + timeLeft + "</h1>");
+    if (timeLeft === 0) {
+        stop();
+    }
+};
+
+function stop () {
+    clearInterval(intervalId);
+}
 
 // ===========THIS IS THE OLD CODE GRAVEYARD, BUT I'M KEEPING IT TO REFER BACK TO
 
